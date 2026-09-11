@@ -2,12 +2,13 @@
 <html lang="bn">
 
 <head>
+
 <meta charset="UTF-8">
 
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>You Chat</title>
+<title>Kothon</title>
 
 <style>
 
@@ -21,6 +22,10 @@ body{
     background:#dfe5e8;
 }
 
+button{
+    cursor:pointer;
+}
+
 .app{
     width:100%;
     max-width:500px;
@@ -31,10 +36,11 @@ body{
     flex-direction:column;
 }
 
+
 /* ================= HEADER ================= */
 
 .header{
-    height:68px;
+    height:65px;
     background:#075e54;
     color:white;
     display:flex;
@@ -42,15 +48,12 @@ body{
     padding:8px 12px;
 }
 
-.logo{
+.profile{
     width:45px;
     height:45px;
     border-radius:50%;
+    object-fit:cover;
     background:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:23px;
     margin-right:10px;
 }
 
@@ -60,28 +63,148 @@ body{
 
 .headerInfo h2{
     margin:0;
-    font-size:19px;
+    font-size:18px;
 }
 
 .headerInfo p{
     margin:3px 0 0;
-    font-size:12px;
+    font-size:11px;
 }
 
 .logout{
-    border:none;
+    border:0;
     background:transparent;
     color:white;
+    font-size:13px;
+}
+
+
+/* ================= SEARCH ================= */
+
+.search{
+    background:#f0f0f0;
+    padding:8px;
+    display:flex;
+    gap:6px;
+}
+
+#searchInput{
+    flex:1;
+    border:0;
+    outline:0;
+    border-radius:22px;
+    padding:11px 14px;
     font-size:14px;
+}
+
+#searchBtn{
+    border:0;
+    border-radius:20px;
+    background:#128c7e;
+    color:white;
+    padding:0 15px;
+}
+
+
+/* ================= USERS ================= */
+
+#userList{
+    max-height:190px;
+    overflow-y:auto;
+    background:white;
+}
+
+.userItem{
+    display:flex;
+    align-items:center;
+    padding:10px;
+    border-bottom:1px solid #eee;
+}
+
+.userItem img{
+    width:43px;
+    height:43px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-right:10px;
+}
+
+.userInfo{
+    flex:1;
+}
+
+.userName{
+    font-weight:bold;
+    font-size:15px;
+}
+
+.userEmail{
+    color:#777;
+    font-size:10px;
+}
+
+.chatBtn{
+    border:0;
+    border-radius:18px;
+    background:#128c7e;
+    color:white;
+    padding:7px 12px;
+}
+
+
+/* ================= CHAT HEADER ================= */
+
+.chatHeader{
+    display:none;
+    align-items:center;
+    background:#128c7e;
+    color:white;
+    padding:7px 10px;
+}
+
+.chatHeader img{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-right:9px;
+}
+
+.chatInfo{
+    flex:1;
+}
+
+.chatName{
+    font-weight:bold;
+    font-size:15px;
+}
+
+.privateText{
+    font-size:10px;
 }
 
 
 /* ================= CHAT ================= */
 
+#welcome{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:#777;
+    padding:25px;
+}
+
+#welcome h2{
+    color:#075e54;
+}
+
 #chat{
+    display:none;
     flex:1;
     overflow-y:auto;
-    padding:15px 10px;
+    padding:12px;
 }
 
 .message{
@@ -103,34 +226,34 @@ body{
     margin-right:auto;
 }
 
-.email{
+.messageName{
     color:#075e54;
     font-size:11px;
     font-weight:bold;
     margin-bottom:3px;
 }
 
-.time{
+.messageTime{
     color:#777;
-    font-size:10px;
+    font-size:9px;
     text-align:right;
     margin-top:4px;
 }
 
 
-/* ================= INPUT ================= */
+/* ================= MESSAGE BOX ================= */
 
-.bottom{
-    background:#f0f0f0;
+#bottom{
+    display:none;
     padding:8px;
-    display:flex;
-    gap:7px;
+    background:#f0f0f0;
+    gap:6px;
 }
 
 #message{
     flex:1;
-    border:none;
-    outline:none;
+    border:0;
+    outline:0;
     border-radius:25px;
     padding:12px 15px;
     font-size:15px;
@@ -139,7 +262,7 @@ body{
 #send{
     width:48px;
     height:48px;
-    border:none;
+    border:0;
     border-radius:50%;
     background:#128c7e;
     color:white;
@@ -164,7 +287,7 @@ body{
     max-width:370px;
     background:white;
     border-radius:18px;
-    padding:25px;
+    padding:24px;
 }
 
 .loginBox h1{
@@ -176,102 +299,177 @@ body{
 .loginBox input{
     width:100%;
     padding:13px;
-    margin:7px 0;
+    margin:6px 0;
     border:1px solid #ccc;
     border-radius:8px;
     font-size:15px;
-    outline:none;
 }
 
 .loginBox button{
     width:100%;
     padding:13px;
     margin-top:8px;
-    border:none;
+    border:0;
     border-radius:8px;
     background:#128c7e;
     color:white;
-    font-size:16px;
+    font-size:15px;
 }
 
-#registerBtn{
-    background:#34a853;
+.registerButton{
+    background:#34a853 !important;
 }
 
-#messageBox{
-    margin-top:12px;
+#registerFields{
+    display:none;
+}
+
+#authMessage{
     text-align:center;
-    font-size:13px;
     color:#d00;
-}
-
-.switch{
-    text-align:center;
-    margin-top:15px;
-    font-size:13px;
+    font-size:12px;
+    margin-top:10px;
 }
 
 </style>
 
 </head>
 
+
 <body>
 
 
-<!-- ================= CHAT APP ================= -->
-
 <div class="app">
 
-    <div class="header">
 
-        <div class="logo">
-            💬
+<!-- ================= HEADER ================= -->
+
+<div class="header">
+
+    <img
+    id="profileImage"
+    class="profile"
+    src="https://via.placeholder.com/100">
+
+    <div class="headerInfo">
+
+        <h2>
+            💬 Kothon
+        </h2>
+
+        <p id="userStatus">
+            Login করুন
+        </p>
+
+    </div>
+
+    <button
+    class="logout"
+    onclick="logout()">
+
+        Logout
+
+    </button>
+
+</div>
+
+
+<!-- ================= SEARCH ================= -->
+
+<div class="search">
+
+    <input
+    id="searchInput"
+    type="text"
+    placeholder="নাম দিয়ে User খুঁজুন">
+
+    <button
+    id="searchBtn">
+
+        🔍
+
+    </button>
+
+</div>
+
+
+<div id="userList"></div>
+
+
+<!-- ================= CHAT HEADER ================= -->
+
+<div
+id="chatHeader"
+class="chatHeader">
+
+    <img
+    id="chatImage"
+    src="https://via.placeholder.com/100">
+
+    <div class="chatInfo">
+
+        <div
+        id="chatName"
+        class="chatName">
+
         </div>
 
-        <div class="headerInfo">
-
-            <h2>
-                You Chat
-            </h2>
-
-            <p id="userStatus">
-                Login করুন
-            </p>
-
+        <div class="privateText">
+            🔒 Private Chat
         </div>
 
-        <button
-        class="logout"
-        onclick="logout()">
+    </div>
 
-            Logout
+</div>
 
-        </button>
+
+<!-- ================= WELCOME ================= -->
+
+<div
+id="welcome">
+
+    <div>
+
+        <h2>
+            💬 Kothon
+        </h2>
+
+        <p>
+            উপরে User-এর নাম লিখে Search করুন।
+        </p>
+
+        <p>
+            তারপর Chat চাপুন।
+        </p>
 
     </div>
 
-
-    <div id="chat">
-
-    </div>
+</div>
 
 
-    <div class="bottom">
+<!-- ================= CHAT ================= -->
 
-        <input
-        id="message"
-        type="text"
-        placeholder="মেসেজ লিখুন..."
-        >
+<div id="chat"></div>
 
-        <button
-        id="send">
 
-            ➤
+<!-- ================= MESSAGE ================= -->
 
-        </button>
+<div id="bottom">
 
-    </div>
+    <input
+    id="message"
+    type="text"
+    placeholder="মেসেজ লিখুন...">
+
+    <button
+    id="send">
+
+        ➤
+
+    </button>
+
+</div>
+
 
 </div>
 
@@ -283,26 +481,36 @@ body{
     <div class="loginBox">
 
         <h1>
-            💬 You Chat
+            💬 Kothon
         </h1>
 
-        <p>
-            Email দিয়ে Login করুন
-        </p>
+
+        <div id="registerFields">
+
+            <input
+            id="name"
+            type="text"
+            placeholder="আপনার নাম">
+
+
+            <input
+            id="photo"
+            type="url"
+            placeholder="Profile ছবির URL (ঐচ্ছিক)">
+
+        </div>
 
 
         <input
         id="email"
         type="email"
-        placeholder="Email"
-        >
+        placeholder="Email">
 
 
         <input
         id="password"
         type="password"
-        placeholder="Password"
-        >
+        placeholder="Password">
 
 
         <button
@@ -314,24 +522,16 @@ body{
 
 
         <button
-        id="registerBtn"
-        onclick="register()">
+        id="registerButton"
+        class="registerButton"
+        onclick="showRegister()">
 
             নতুন Account তৈরি করুন
 
         </button>
 
 
-        <div
-        id="messageBox">
-        </div>
-
-
-        <div class="switch">
-
-            You Chat © 2026
-
-        </div>
+        <div id="authMessage"></div>
 
     </div>
 
@@ -349,9 +549,10 @@ body{
 
 <script>
 
-/* ==================================================
-   FIREBASE CONFIG
-================================================== */
+
+/* =================================================
+   FIREBASE
+================================================= */
 
 const firebaseConfig = {
 
@@ -382,53 +583,101 @@ const firebaseConfig = {
 };
 
 
-/* Firebase চালু */
-
 firebase.initializeApp(firebaseConfig);
 
-
-/* Firebase Auth */
 
 const auth =
 firebase.auth();
 
 
-/* Firebase Database */
-
 const database =
 firebase.database();
 
 
-/* ==================================================
-   MESSAGE
-================================================== */
+let currentUser = null;
 
-function showError(text){
+let myProfile = null;
+
+let selectedUser = null;
+
+let currentChatId = null;
+
+
+/* =================================================
+   REGISTER
+================================================= */
+
+function showRegister(){
 
     document
-    .getElementById("messageBox")
-    .innerText = text;
+    .getElementById(
+        "registerFields"
+    )
+    .style.display =
+    "block";
+
+
+    document
+    .getElementById(
+        "registerButton"
+    )
+    .innerText =
+    "Account তৈরি করুন";
+
+
+    document
+    .getElementById(
+        "registerButton"
+    )
+    .onclick =
+    register;
 
 }
 
 
-/* ==================================================
-   REGISTER
-================================================== */
+/* =================================================
+   REGISTER ACCOUNT
+================================================= */
 
 function register(){
+
+    const name =
+    document
+    .getElementById("name")
+    .value
+    .trim();
+
+
+    const photo =
+    document
+    .getElementById("photo")
+    .value
+    .trim();
+
 
     const email =
     document
     .getElementById("email")
     .value
-    .trim();
+    .trim()
+    .toLowerCase();
 
 
     const password =
     document
     .getElementById("password")
     .value;
+
+
+    if(name === ""){
+
+        showError(
+            "আপনার নাম লিখুন"
+        );
+
+        return;
+
+    }
 
 
     if(email === ""){
@@ -461,16 +710,40 @@ function register(){
 
     .then(function(result){
 
-        showError(
-            "Account তৈরি হয়েছে ✅"
-        );
+        currentUser =
+        result.user;
+
+
+        return database
+        .ref(
+            "users/" +
+            currentUser.uid
+        )
+        .set({
+
+            uid:
+            currentUser.uid,
+
+            name:
+            name,
+
+            email:
+            email,
+
+            photo:
+            photo,
+
+            createdAt:
+            firebase.database.ServerValue.TIMESTAMP
+
+        });
 
     })
 
     .catch(function(error){
 
         showError(
-            error.message
+            firebaseError(error)
         );
 
     });
@@ -478,9 +751,9 @@ function register(){
 }
 
 
-/* ==================================================
+/* =================================================
    LOGIN
-================================================== */
+================================================= */
 
 function login(){
 
@@ -488,7 +761,8 @@ function login(){
     document
     .getElementById("email")
     .value
-    .trim();
+    .trim()
+    .toLowerCase();
 
 
     const password =
@@ -525,16 +799,10 @@ function login(){
         password
     )
 
-    .then(function(result){
-
-        showError("");
-
-    })
-
     .catch(function(error){
 
         showError(
-            error.message
+            firebaseError(error)
         );
 
     });
@@ -542,14 +810,18 @@ function login(){
 }
 
 
-/* ==================================================
+/* =================================================
    AUTH STATE
-================================================== */
+================================================= */
 
 auth.onAuthStateChanged(
 function(user){
 
     if(user){
+
+        currentUser =
+        user;
+
 
         document
         .getElementById(
@@ -559,18 +831,13 @@ function(user){
         "none";
 
 
-        document
-        .getElementById(
-            "userStatus"
-        )
-        .innerText =
-        "🟢 " +
-        user.email;
-
-
-        loadMessages();
+        loadMyProfile();
 
     }else{
+
+        currentUser =
+        null;
+
 
         document
         .getElementById(
@@ -579,33 +846,516 @@ function(user){
         .style.display =
         "flex";
 
+    }
+
+});
+
+
+/* =================================================
+   MY PROFILE
+================================================= */
+
+function loadMyProfile(){
+
+    database
+    .ref(
+        "users/" +
+        currentUser.uid
+    )
+    .once("value")
+
+    .then(function(snapshot){
+
+        myProfile =
+        snapshot.val();
+
+
+        if(!myProfile){
+
+            return;
+
+        }
+
 
         document
         .getElementById(
             "userStatus"
         )
         .innerText =
-        "Login করুন";
-
-    }
-
-});
+        "🟢 " +
+        myProfile.name;
 
 
-/* ==================================================
-   LOGOUT
-================================================== */
+        if(myProfile.photo){
 
-function logout(){
+            document
+            .getElementById(
+                "profileImage"
+            )
+            .src =
+            myProfile.photo;
 
-    auth.signOut();
+        }
+
+    });
 
 }
 
 
-/* ==================================================
+/* =================================================
+   SEARCH
+================================================= */
+
+document
+.getElementById("searchBtn")
+.addEventListener(
+    "click",
+    searchUsers
+);
+
+
+document
+.getElementById("searchInput")
+.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Enter"){
+
+            searchUsers();
+
+        }
+
+    }
+);
+
+
+function searchUsers(){
+
+    const text =
+    document
+    .getElementById(
+        "searchInput"
+    )
+    .value
+    .trim()
+    .toLowerCase();
+
+
+    const list =
+    document.getElementById(
+        "userList"
+    );
+
+
+    list.innerHTML = "";
+
+
+    if(text === ""){
+
+        return;
+
+    }
+
+
+    database
+    .ref("users")
+    .once("value")
+
+    .then(function(snapshot){
+
+        snapshot.forEach(
+        function(child){
+
+            const user =
+            child.val();
+
+
+            if(
+                !currentUser ||
+                user.uid === currentUser.uid
+            ){
+
+                return;
+
+            }
+
+
+            const name =
+            (user.name || "")
+            .toLowerCase();
+
+
+            if(
+                name.includes(text)
+            ){
+
+                createUserItem(
+                    user
+                );
+
+            }
+
+        });
+
+    })
+
+    .catch(function(error){
+
+        alert(
+            "User খুঁজতে সমস্যা হয়েছে:\n" +
+            error.message
+        );
+
+    });
+
+}
+
+
+/* =================================================
+   USER ITEM
+================================================= */
+
+function createUserItem(user){
+
+    const list =
+    document.getElementById(
+        "userList"
+    );
+
+
+    const item =
+    document.createElement(
+        "div"
+    );
+
+
+    item.className =
+    "userItem";
+
+
+    const image =
+    document.createElement(
+        "img"
+    );
+
+
+    image.src =
+    user.photo ||
+    "https://via.placeholder.com/100";
+
+
+    const info =
+    document.createElement(
+        "div"
+    );
+
+
+    info.className =
+    "userInfo";
+
+
+    const name =
+    document.createElement(
+        "div"
+    );
+
+
+    name.className =
+    "userName";
+
+
+    name.innerText =
+    user.name ||
+    "User";
+
+
+    const email =
+    document.createElement(
+        "div"
+    );
+
+
+    email.className =
+    "userEmail";
+
+
+    email.innerText =
+    user.email ||
+    "";
+
+
+    info.appendChild(
+        name
+    );
+
+
+    info.appendChild(
+        email
+    );
+
+
+    const button =
+    document.createElement(
+        "button"
+    );
+
+
+    button.className =
+    "chatBtn";
+
+
+    button.innerText =
+    "Chat";
+
+
+    button.onclick =
+    function(){
+
+        openChat(
+            user
+        );
+
+    };
+
+
+    item.appendChild(
+        image
+    );
+
+
+    item.appendChild(
+        info
+    );
+
+
+    item.appendChild(
+        button
+    );
+
+
+    list.appendChild(
+        item
+    );
+
+}
+
+
+/* =================================================
+   CHAT ID
+================================================= */
+
+function makeChatId(
+    uid1,
+    uid2
+){
+
+    return [
+        uid1,
+        uid2
+    ]
+    .sort()
+    .join("_");
+
+}
+
+
+/* =================================================
+   OPEN CHAT
+================================================= */
+
+function openChat(user){
+
+    selectedUser =
+    user;
+
+
+    currentChatId =
+    makeChatId(
+        currentUser.uid,
+        user.uid
+    );
+
+
+    document
+    .getElementById(
+        "welcome"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "chat"
+    )
+    .style.display =
+    "block";
+
+
+    document
+    .getElementById(
+        "bottom"
+    )
+    .style.display =
+    "flex";
+
+
+    document
+    .getElementById(
+        "chatHeader"
+    )
+    .style.display =
+    "flex";
+
+
+    document
+    .getElementById(
+        "chatName"
+    )
+    .innerText =
+    user.name;
+
+
+    document
+    .getElementById(
+        "chatImage"
+    )
+    .src =
+    user.photo ||
+    "https://via.placeholder.com/100";
+
+
+    prepareChat();
+
+}
+
+
+/* =================================================
+   PREPARE CHAT
+================================================= */
+
+function prepareChat(){
+
+    const ref =
+    database
+    .ref(
+        "chats/" +
+        currentChatId
+    );
+
+
+    ref.once("value")
+
+    .then(function(snapshot){
+
+        if(snapshot.exists()){
+
+            loadMessages();
+
+            return;
+
+        }
+
+
+        const members = {};
+
+
+        members[
+            currentUser.uid
+        ] = true;
+
+
+        members[
+            selectedUser.uid
+        ] = true;
+
+
+        return ref.set({
+
+            members:
+
+            members,
+
+            createdAt:
+
+            firebase.database.ServerValue.TIMESTAMP
+
+        });
+
+    })
+
+    .then(function(){
+
+        loadMessages();
+
+    })
+
+    .catch(function(error){
+
+        alert(
+            "Chat তৈরি করা যায়নি:\n" +
+            error.message
+        );
+
+    });
+
+}
+
+
+/* =================================================
+   LOAD MESSAGES
+================================================= */
+
+function loadMessages(){
+
+    const chat =
+    document.getElementById(
+        "chat"
+    );
+
+
+    chat.innerHTML = "";
+
+
+    const ref =
+    database
+    .ref(
+        "chats/" +
+        currentChatId +
+        "/messages"
+    );
+
+
+    ref.off();
+
+
+    ref.on(
+        "child_added",
+        function(snapshot){
+
+            showMessage(
+                snapshot.val()
+            );
+
+        },
+
+        function(error){
+
+            alert(
+                "Message পড়া যাচ্ছে না:\n" +
+                error.message
+            );
+
+        }
+    );
+
+}
+
+
+/* =================================================
    SEND MESSAGE
-================================================== */
+================================================= */
 
 document
 .getElementById("send")
@@ -634,8 +1384,7 @@ document
 function sendMessage(){
 
     const input =
-    document
-    .getElementById(
+    document.getElementById(
         "message"
     );
 
@@ -651,11 +1400,7 @@ function sendMessage(){
     }
 
 
-    const user =
-    auth.currentUser;
-
-
-    if(!user){
+    if(!currentUser){
 
         alert(
             "আগে Login করুন"
@@ -666,15 +1411,34 @@ function sendMessage(){
     }
 
 
+    if(!currentChatId){
+
+        alert(
+            "আগে একজন User-এর Chat খুলুন"
+        );
+
+        return;
+
+    }
+
+
+    const ref =
     database
-    .ref("messages")
-    .push({
+    .ref(
+        "chats/" +
+        currentChatId +
+        "/messages"
+    )
+    .push();
+
+
+    ref.set({
 
         uid:
-        user.uid,
+        currentUser.uid,
 
-        email:
-        user.email,
+        name:
+        myProfile.name,
 
         text:
         text,
@@ -692,55 +1456,29 @@ function sendMessage(){
         createdAt:
         firebase.database.ServerValue.TIMESTAMP
 
+    })
+
+    .then(function(){
+
+        input.value = "";
+
+    })
+
+    .catch(function(error){
+
+        alert(
+            "Message পাঠানো যায়নি:\n" +
+            error.message
+        );
+
     });
 
-
-    input.value = "";
-
 }
 
 
-/* ==================================================
-   LOAD MESSAGES
-================================================== */
-
-function loadMessages(){
-
-    const chat =
-    document.getElementById(
-        "chat"
-    );
-
-
-    chat.innerHTML = "";
-
-
-    database
-    .ref("messages")
-    .off();
-
-
-    database
-    .ref("messages")
-    .on(
-        "child_added",
-        function(snapshot){
-
-            const data =
-            snapshot.val();
-
-
-            showMessage(data);
-
-        }
-    );
-
-}
-
-
-/* ==================================================
+/* =================================================
    SHOW MESSAGE
-================================================== */
+================================================= */
 
 function showMessage(data){
 
@@ -750,90 +1488,49 @@ function showMessage(data){
     );
 
 
-    const div =
+    const box =
     document.createElement(
         "div"
     );
 
 
-    const user =
-    auth.currentUser;
-
-
     if(
-        user &&
-        data.uid === user.uid
+        data.uid ===
+        currentUser.uid
     ){
 
-        div.className =
+        box.className =
         "message myMessage";
 
     }else{
 
-        div.className =
+        box.className =
         "message otherMessage";
 
     }
 
 
-    div.innerHTML =
-
-    '<div class="email">' +
-
-    escapeHTML(
-        data.email || "User"
-    ) +
-
-    '</div>' +
-
-    '<div>' +
-
-    escapeHTML(
-        data.text || ""
-    ) +
-
-    '</div>' +
-
-    '<div class="time">' +
-
-    escapeHTML(
-        data.time || ""
-    ) +
-
-    '</div>';
-
-
-    chat.appendChild(
-        div
-    );
-
-
-    chat.scrollTop =
-    chat.scrollHeight;
-
-}
-
-
-/* ==================================================
-   SECURITY
-================================================== */
-
-function escapeHTML(text){
-
-    const div =
+    const name =
     document.createElement(
         "div"
     );
 
-    div.textContent =
-    text;
 
-    return div.innerHTML;
+    name.className =
+    "messageName";
 
-}
 
-</script>
+    name.innerText =
+    data.name ||
+    "User";
 
-</body>
 
-</html>
+    const text =
+    document.createElement(
+        "div"
+    );
+
+
+    text.innerText =
+    data.text ||
+            
