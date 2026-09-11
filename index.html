@@ -1238,50 +1238,22 @@ function openChat(user){
 function prepareChat(){
 
     const ref =
-    database
-    .ref(
+    database.ref(
         "chats/" +
         currentChatId
     );
 
 
-    ref.once("value")
+    const members = {};
 
-    .then(function(snapshot){
+    members[currentUser.uid] = true;
 
-        if(snapshot.exists()){
-
-            loadMessages();
-
-            return;
-
-        }
+    members[selectedUser.uid] = true;
 
 
-        const members = {};
+    ref.update({
 
-
-        members[
-            currentUser.uid
-        ] = true;
-
-
-        members[
-            selectedUser.uid
-        ] = true;
-
-
-        return ref.set({
-
-            members:
-
-            members,
-
-            createdAt:
-
-            firebase.database.ServerValue.TIMESTAMP
-
-        });
+        members: members
 
     })
 
@@ -1297,6 +1269,8 @@ function prepareChat(){
             "Chat তৈরি করা যায়নি:\n" +
             error.message
         );
+
+        console.log(error);
 
     });
 
