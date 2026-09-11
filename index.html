@@ -1526,11 +1526,127 @@ function showMessage(data){
 
 
     const text =
-    document.createElement(
-        "div"
-    );
+document.createElement(
+    "div"
+);
+
+text.innerText =
+data.text ||
+"";
 
 
-    text.innerText =
-    data.text ||
-            
+const time =
+document.createElement(
+    "div"
+);
+
+time.className =
+"messageTime";
+
+time.innerText =
+data.time ||
+"";
+
+
+box.appendChild(
+    name
+);
+
+box.appendChild(
+    text
+);
+
+box.appendChild(
+    time
+);
+
+
+chat.appendChild(
+    box
+);
+
+
+chat.scrollTop =
+chat.scrollHeight;
+
+}
+
+
+/* =================================================
+   LOGOUT
+================================================= */
+
+function logout(){
+
+    auth.signOut();
+
+}
+
+
+/* =================================================
+   ERROR
+================================================= */
+
+function showError(text){
+
+    document
+    .getElementById(
+        "authMessage"
+    )
+    .innerText =
+    text;
+
+}
+
+
+function firebaseError(error){
+
+    if(
+        error.code ===
+        "auth/email-already-in-use"
+    ){
+
+        return "এই Email দিয়ে Account আগে থেকেই আছে।";
+
+    }
+
+
+    if(
+        error.code ===
+        "auth/invalid-email"
+    ){
+
+        return "Email ঠিক নয়।";
+
+    }
+
+
+    if(
+        error.code ===
+        "auth/weak-password"
+    ){
+
+        return "Password কমপক্ষে ৬ অক্ষরের হতে হবে।";
+
+    }
+
+
+    if(
+        error.code ===
+        "auth/invalid-credential"
+    ){
+
+        return "Email অথবা Password ভুল।";
+
+    }
+
+
+    return error.message;
+
+}
+
+</script>
+
+</body>
+
+</html>
