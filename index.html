@@ -1288,12 +1288,8 @@ function loadFriends(){
    CHAT ID
 ========================= */
 
-function getChatId(uid1,uid2){
-
-  return [uid1,uid2]
-    .sort()
-    .join("_");
-
+function getChatId(uid1, uid2){
+  return "v2_" + [uid1, uid2].sort().join("_");
 }
 
 
