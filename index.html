@@ -11,717 +11,652 @@
 <style>
 
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+  box-sizing:border-box;
 }
 
 body{
-    font-family:Arial,"Noto Sans Bengali",sans-serif;
-    background:#d9dbd5;
-    min-height:100vh;
+  margin:0;
+  padding:0;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#d9dbd5;
 }
 
 .app{
-    width:100%;
-    max-width:500px;
-    height:100vh;
-    margin:auto;
-    background:#efeae2;
-    position:relative;
-    overflow:hidden;
+  width:100%;
+  max-width:520px;
+  height:100vh;
+  margin:auto;
+  background:#efeae2;
+  position:relative;
+  overflow:hidden;
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 
 .header{
-    height:65px;
-    background:#075e54;
-    color:white;
-    display:flex;
-    align-items:center;
-    padding:8px 10px;
-}
-
-.headerLogo{
-    width:45px;
-    height:45px;
-    object-fit:contain;
-    border-radius:12px;
-    margin-right:8px;
+  height:65px;
+  background:#075e54;
+  color:white;
+  display:flex;
+  align-items:center;
+  padding:8px 10px;
+  gap:10px;
 }
 
 .profile{
-    width:43px;
-    height:43px;
-    border-radius:50%;
-    object-fit:cover;
-    background:white;
-    margin-right:10px;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  object-fit:cover;
+  background:white;
 }
 
 .headerInfo{
-    flex:1;
-    overflow:hidden;
+  flex:1;
+  min-width:0;
 }
 
 .headerInfo h2{
-    font-size:18px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+  margin:0;
+  font-size:20px;
 }
 
 .headerInfo p{
-    font-size:12px;
-    opacity:.9;
-    margin-top:2px;
+  margin:3px 0 0;
+  font-size:12px;
+  opacity:.9;
 }
 
 .logout{
-    background:#ffffff22;
-    color:white;
-    border:1px solid #ffffff55;
-    padding:8px 10px;
-    border-radius:8px;
-    cursor:pointer;
+  border:none;
+  background:#d32f2f;
+  color:white;
+  padding:8px 10px;
+  border-radius:7px;
+  cursor:pointer;
 }
 
-/* ================= SEARCH ================= */
+/* SEARCH */
 
-.searchBox{
-    display:flex;
-    gap:6px;
-    padding:8px;
-    background:#f0f2f5;
+.searchArea{
+  padding:10px;
+  background:#f0f2f5;
+  display:flex;
+  gap:6px;
 }
 
-.searchBox input{
-    flex:1;
-    padding:11px;
-    border:1px solid #ddd;
-    border-radius:8px;
-    outline:none;
-    font-size:14px;
+.searchArea input{
+  flex:1;
+  padding:11px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:15px;
 }
 
-.searchBox button{
-    background:#128c7e;
-    color:white;
-    border:0;
-    border-radius:8px;
-    padding:0 15px;
-    cursor:pointer;
+.searchArea button{
+  border:none;
+  background:#075e54;
+  color:white;
+  padding:0 15px;
+  border-radius:8px;
 }
 
-/* ================= TITLES ================= */
+/* TITLES */
 
 .sectionTitle{
-    padding:8px 12px;
-    font-size:14px;
-    font-weight:bold;
-    color:#555;
-    background:#e9edef;
+  padding:10px 12px;
+  font-weight:bold;
+  background:#e9edef;
+  color:#075e54;
 }
 
-/* ================= USER LIST ================= */
+/* USERS */
 
 .userList,
+.friendList,
 .recentList{
-    max-height:210px;
-    overflow-y:auto;
-    background:white;
+  overflow-y:auto;
 }
 
 .userItem,
+.friendItem,
 .recentItem{
-    display:flex;
-    align-items:center;
-    padding:9px 12px;
-    border-bottom:1px solid #eee;
-    cursor:pointer;
-}
-
-.userItem:hover,
-.recentItem:hover{
-    background:#f5f5f5;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  background:white;
+  border-bottom:1px solid #eee;
 }
 
 .userItem img,
+.friendItem img,
 .recentItem img{
-    width:45px;
-    height:45px;
-    border-radius:50%;
-    object-fit:cover;
-    margin-right:10px;
-    background:#ddd;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  object-fit:cover;
 }
 
 .userInfo{
-    flex:1;
+  flex:1;
 }
 
 .userName{
-    font-size:15px;
-    font-weight:bold;
+  font-weight:bold;
+  color:#222;
 }
 
 .userEmail{
-    font-size:12px;
-    color:#777;
-    margin-top:3px;
+  font-size:12px;
+  color:#777;
+  margin-top:3px;
+}
+
+.actionButton{
+  border:none;
+  padding:8px 10px;
+  border-radius:7px;
+  color:white;
+  cursor:pointer;
+}
+
+.addFriend{
+  background:#128c7e;
 }
 
 .chatButton{
-    background:#128c7e;
-    color:white;
-    border:0;
-    border-radius:7px;
-    padding:7px 10px;
-    cursor:pointer;
+  background:#075e54;
 }
 
-/* ================= CHAT HEADER ================= */
+.alreadyFriend{
+  background:#777;
+}
+
+/* CHAT */
+
+#chatArea{
+  display:none;
+  position:absolute;
+  top:65px;
+  left:0;
+  right:0;
+  bottom:0;
+  background:#efeae2;
+  z-index:10;
+}
 
 .chatHeader{
-    height:60px;
-    background:#075e54;
-    color:white;
-    display:none;
-    align-items:center;
-    padding:7px 10px;
+  height:60px;
+  background:#075e54;
+  color:white;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:7px 10px;
+}
+
+.backButton{
+  border:none;
+  background:transparent;
+  color:white;
+  font-size:28px;
+  cursor:pointer;
 }
 
 .chatHeader img{
-    width:44px;
-    height:44px;
-    border-radius:50%;
-    object-fit:cover;
-    background:white;
-    margin-right:10px;
+  width:43px;
+  height:43px;
+  border-radius:50%;
+  object-fit:cover;
 }
 
 .chatInfo{
-    flex:1;
+  flex:1;
 }
 
 .chatName{
-    font-size:16px;
-    font-weight:bold;
+  font-size:18px;
+  font-weight:bold;
 }
 
 .privateText{
-    font-size:11px;
-    opacity:.9;
-    margin-top:3px;
+  font-size:11px;
+  opacity:.9;
 }
 
-/* ================= WELCOME ================= */
-
-#welcome{
-    height:calc(100vh - 65px);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:30px;
-    color:#555;
-}
-
-#welcome h2{
-    color:#075e54;
-    margin-bottom:10px;
-}
-
-.welcomeLogo{
-    width:100px;
-    height:100px;
-    object-fit:contain;
-    border-radius:22px;
-    display:block;
-    margin:0 auto 15px;
-}
-
-/* ================= CHAT ================= */
-
-#chatArea{
-    display:none;
-    height:calc(100vh - 125px);
-    position:relative;
-}
-
-#messages{
-    height:calc(100% - 60px);
-    overflow-y:auto;
-    padding:10px;
-    background:#efeae2;
+.messages{
+  position:absolute;
+  top:60px;
+  bottom:62px;
+  left:0;
+  right:0;
+  overflow-y:auto;
+  padding:12px 8px;
 }
 
 .messageRow{
-    display:flex;
-    margin:5px 0;
+  display:flex;
+  margin:5px 0;
 }
 
 .messageRow.mine{
-    justify-content:flex-end;
+  justify-content:flex-end;
 }
 
 .messageRow.other{
-    justify-content:flex-start;
+  justify-content:flex-start;
 }
 
-.message{
-    max-width:78%;
-    padding:7px 9px;
-    border-radius:8px;
-    box-shadow:0 1px 1px #0002;
-    word-wrap:break-word;
+.messageBubble{
+  max-width:78%;
+  padding:8px 10px;
+  border-radius:8px;
+  word-wrap:break-word;
+  white-space:pre-wrap;
+  font-size:15px;
 }
 
-.mine .message{
-    background:#d9ffc7;
+.mine .messageBubble{
+  background:#d9fdd3;
+  border-top-right-radius:2px;
 }
 
-.other .message{
-    background:white;
+.other .messageBubble{
+  background:white;
+  border-top-left-radius:2px;
 }
 
 .messageName{
-    font-size:11px;
-    font-weight:bold;
-    color:#075e54;
-    margin-bottom:3px;
-}
-
-.messageText{
-    font-size:14px;
-    white-space:pre-wrap;
+  font-size:11px;
+  font-weight:bold;
+  color:#075e54;
+  margin-bottom:3px;
 }
 
 .messageTime{
-    font-size:9px;
-    color:#777;
-    text-align:right;
-    margin-top:3px;
+  font-size:9px;
+  color:#777;
+  text-align:right;
+  margin-top:3px;
 }
 
-/* ================= MESSAGE BOX ================= */
+/* MESSAGE BOX */
 
 .messageBox{
-    height:60px;
-    background:#f0f2f5;
-    display:flex;
-    align-items:center;
-    gap:7px;
-    padding:8px;
-    position:absolute;
-    bottom:0;
-    left:0;
-    right:0;
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:62px;
+  background:#f0f2f5;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:8px;
 }
 
 .messageBox input{
-    flex:1;
-    border:0;
-    outline:none;
-    border-radius:22px;
-    padding:12px 15px;
-    font-size:14px;
+  flex:1;
+  height:45px;
+  border:none;
+  border-radius:22px;
+  padding:0 16px;
+  font-size:15px;
+  outline:none;
 }
 
 .sendButton{
-    width:45px;
-    height:45px;
-    border-radius:50%;
-    border:0;
-    background:#128c7e;
-    color:white;
-    font-size:18px;
-    cursor:pointer;
+  width:45px;
+  height:45px;
+  border:none;
+  border-radius:50%;
+  background:#128c7e;
+  color:white;
+  font-size:19px;
+  cursor:pointer;
 }
 
-/* ================= LOGIN ================= */
+/* WELCOME */
+
+#welcome{
+  padding:35px 20px;
+  text-align:center;
+  color:#555;
+}
+
+#welcome img{
+  width:90px;
+  height:90px;
+  object-fit:contain;
+  margin-bottom:10px;
+}
+
+#welcome h2{
+  color:#075e54;
+}
+
+/* LOGIN */
 
 #loginScreen{
-    position:fixed;
-    inset:0;
-    background:#075e54;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    z-index:1000;
+  position:fixed;
+  inset:0;
+  background:#075e54;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
 }
 
 .loginBox{
-    width:100%;
-    max-width:380px;
-    background:white;
-    padding:25px;
-    border-radius:18px;
-    box-shadow:0 8px 30px #0004;
+  width:100%;
+  max-width:400px;
+  background:white;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 10px 35px rgba(0,0,0,.3);
 }
 
-.kothonLogo{
-    width:85px;
-    height:85px;
-    object-fit:contain;
-    display:block;
-    margin:0 auto 8px;
-    border-radius:18px;
+.loginLogo{
+  display:block;
+  width:90px;
+  height:90px;
+  object-fit:contain;
+  margin:0 auto 10px;
 }
 
 .loginBox h1{
-    text-align:center;
-    color:#075e54;
-    margin-bottom:18px;
+  text-align:center;
+  color:#075e54;
+  margin:5px 0 20px;
 }
 
 .loginBox input{
-    width:100%;
-    padding:12px;
-    margin-bottom:10px;
-    border:1px solid #ddd;
-    border-radius:8px;
-    outline:none;
-    font-size:14px;
+  width:100%;
+  padding:12px;
+  margin:6px 0;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:15px;
 }
 
 .loginBox button{
-    width:100%;
-    padding:12px;
-    border:0;
-    border-radius:8px;
-    background:#128c7e;
-    color:white;
-    font-size:15px;
-    cursor:pointer;
-    margin-top:5px;
+  width:100%;
+  padding:12px;
+  margin-top:8px;
+  border:none;
+  border-radius:8px;
+  background:#075e54;
+  color:white;
+  font-size:15px;
 }
 
 .registerButton{
-    background:#34a853 !important;
-}
-
-#registerFields{
-    display:none;
+  background:#128c7e !important;
 }
 
 #authMessage{
-    text-align:center;
-    margin-top:12px;
-    font-size:13px;
-    color:#d00;
-    min-height:18px;
+  text-align:center;
+  color:#d32f2f;
+  margin-top:10px;
+  font-size:13px;
 }
 
-/* ================= MOBILE ================= */
+#registerFields{
+  display:none;
+}
 
-@media(max-width:500px){
-
-    .app{
-        height:100vh;
-    }
-
-    .message{
-        max-width:82%;
-    }
-
+.empty{
+  text-align:center;
+  padding:20px;
+  color:#777;
 }
 
 </style>
 </head>
 
-
 <body>
 
 <div class="app">
 
-    <!-- ================= HEADER ================= -->
+  <!-- MAIN HEADER -->
 
-    <div class="header">
+  <div class="header">
 
-        <img
-            src="logo.png"
-            class="headerLogo"
-            alt="Kothon Logo"
-        >
+    <img id="profileImage"
+         class="profile"
+         src="logo.png">
 
-        <img
-            id="profileImage"
-            class="profile"
-            src="https://via.placeholder.com/100"
-            alt="Profile"
-        >
+    <div class="headerInfo">
+      <h2>💬 Kothon</h2>
+      <p id="userStatus">Login করুন</p>
+    </div>
 
-        <div class="headerInfo">
+    <button class="logout" onclick="logout()">Logout</button>
 
-            <h2>Kothon</h2>
+  </div>
 
-            <p id="userStatus">
-                Login করুন
-            </p>
 
+  <!-- SEARCH -->
+
+  <div class="searchArea">
+
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="নাম দিয়ে User Search করুন">
+
+    <button onclick="searchUsers()">Search</button>
+
+  </div>
+
+
+  <!-- SEARCH RESULTS -->
+
+  <div class="sectionTitle">
+    🔍 Search Result
+  </div>
+
+  <div id="userList" class="userList"></div>
+
+
+  <!-- FRIENDS -->
+
+  <div class="sectionTitle">
+    👥 My Friends
+  </div>
+
+  <div id="friendList" class="friendList"></div>
+
+
+  <!-- RECENT -->
+
+  <div class="sectionTitle">
+    💬 Recent Chats
+  </div>
+
+  <div id="recentList" class="recentList"></div>
+
+
+  <!-- WELCOME -->
+
+  <div id="welcome">
+
+    <img src="logo.png">
+
+    <h2>💬 Kothon</h2>
+
+    <p>
+      প্রথমে User Search করুন।
+    </p>
+
+    <p>
+      তারপর ➕ Add Friend চাপুন।
+    </p>
+
+    <p>
+      Friend হয়ে গেলে 💬 Chat করে মেসেজ পাঠাতে পারবেন।
+    </p>
+
+  </div>
+
+
+  <!-- CHAT AREA -->
+
+  <div id="chatArea">
+
+    <div class="chatHeader">
+
+      <button class="backButton" onclick="closeChat()">
+        ‹
+      </button>
+
+      <img
+        id="chatImage"
+        src="logo.png">
+
+      <div class="chatInfo">
+
+        <div id="chatName" class="chatName">
+          User
         </div>
 
-        <button
-            class="logout"
-            onclick="logout()"
-        >
-            Logout
-        </button>
-
-    </div>
-
-
-    <!-- ================= SEARCH ================= -->
-
-    <div class="searchBox">
-
-        <input
-            id="searchInput"
-            type="text"
-            placeholder="User-এর নাম লিখুন..."
-            onkeydown="if(event.key==='Enter') searchUsers()"
-        >
-
-        <button onclick="searchUsers()">
-            Search
-        </button>
-
-    </div>
-
-
-    <!-- ================= RECENT CHAT ================= -->
-
-    <div class="sectionTitle">
-        🕘 Recent Chats
-    </div>
-
-    <div
-        id="recentChats"
-        class="recentList"
-    ></div>
-
-
-    <!-- ================= SEARCH RESULT ================= -->
-
-    <div class="sectionTitle">
-        👥 Users
-    </div>
-
-    <div
-        id="userList"
-        class="userList"
-    ></div>
-
-
-    <!-- ================= WELCOME ================= -->
-
-    <div id="welcome">
-
-        <div>
-
-            <img
-                src="logo.png"
-                class="welcomeLogo"
-                alt="Kothon Logo"
-            >
-
-            <h2>Kothon</h2>
-
-            <p>
-                উপরে User-এর নাম লিখে Search করুন।
-            </p>
-
-            <p style="margin-top:8px;">
-                যার সাথে Chat করবেন সে পরে Recent Chat-এ থাকবে।
-            </p>
-
+        <div class="privateText">
+          🔒 Private Chat
         </div>
 
-    </div>
-
-
-    <!-- ================= CHAT HEADER ================= -->
-
-    <div
-        id="chatHeader"
-        class="chatHeader"
-    >
-
-        <img
-            id="chatImage"
-            src="https://via.placeholder.com/100"
-            alt="User"
-        >
-
-        <div class="chatInfo">
-
-            <div
-                id="chatName"
-                class="chatName"
-            ></div>
-
-            <div class="privateText">
-                🔒 Private Chat
-            </div>
-
-        </div>
+      </div>
 
     </div>
 
 
-    <!-- ================= CHAT AREA ================= -->
+    <!-- MESSAGES -->
 
-    <div id="chatArea">
-
-        <div id="messages"></div>
+    <div id="messages" class="messages"></div>
 
 
-        <!-- MESSAGE INPUT -->
+    <!-- MESSAGE INPUT -->
 
-        <div class="messageBox">
+    <div class="messageBox">
 
-            <input
-                id="messageInput"
-                type="text"
-                placeholder="মেসেজ লিখুন..."
-                onkeydown="if(event.key==='Enter') sendMessage()"
-            >
+      <input
+        id="messageInput"
+        type="text"
+        placeholder="মেসেজ লিখুন...">
 
-            <button
-                class="sendButton"
-                onclick="sendMessage()"
-            >
-                ➤
-            </button>
-
-        </div>
+      <button
+        class="sendButton"
+        onclick="sendMessage()">
+        ➤
+      </button>
 
     </div>
+
+  </div>
 
 </div>
 
 
-<!-- ================= LOGIN SCREEN ================= -->
+<!-- LOGIN SCREEN -->
 
 <div id="loginScreen">
 
-    <div class="loginBox">
+  <div class="loginBox">
 
-        <img
-            src="logo.png"
-            class="kothonLogo"
-            alt="Kothon Logo"
-        >
+    <img
+      src="logo.png"
+      class="loginLogo">
 
-        <h1>Kothon</h1>
+    <h1>💬 Kothon</h1>
 
 
-        <!-- REGISTER FIELDS -->
+    <!-- REGISTER FIELDS -->
 
-        <div id="registerFields">
+    <div id="registerFields">
 
-            <input
-                id="name"
-                type="text"
-                placeholder="আপনার নাম"
-            >
+      <input
+        id="registerName"
+        type="text"
+        placeholder="আপনার নাম">
 
-            <input
-                id="photo"
-                type="text"
-                placeholder="Profile Photo URL (Optional)"
-            >
-
-        </div>
-
-
-        <input
-            id="email"
-            type="email"
-            placeholder="Email"
-        >
-
-        <input
-            id="password"
-            type="password"
-            placeholder="Password"
-        >
-
-
-        <button
-            id="loginButton"
-            onclick="login()"
-        >
-            Login
-        </button>
-
-
-        <button
-            id="registerButton"
-            class="registerButton"
-            onclick="showRegister()"
-        >
-            নতুন Account তৈরি করুন
-        </button>
-
-
-        <div id="authMessage"></div>
+      <input
+        id="registerPhoto"
+        type="text"
+        placeholder="Profile Photo URL (Optional)">
 
     </div>
+
+
+    <input
+      id="email"
+      type="email"
+      placeholder="Email">
+
+    <input
+      id="password"
+      type="password"
+      placeholder="Password">
+
+
+    <button
+      id="loginButton"
+      onclick="login()">
+      Login
+    </button>
+
+
+    <button
+      id="registerButton"
+      class="registerButton"
+      onclick="showRegister()">
+      নতুন Account তৈরি করুন
+    </button>
+
+
+    <div id="authMessage"></div>
+
+  </div>
 
 </div>
 
 
-<!-- ================= FIREBASE ================= -->
+<!-- FIREBASE -->
 
 <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-database-compat.js"></script>
 
 
 <script>
 
-/* =========================================================
+/* =========================
    FIREBASE CONFIG
-========================================================= */
+========================= */
 
 const firebaseConfig = {
 
-    apiKey:
-    "AIzaSyD_HUTzo6I-X4rpDnoKArfPofSSHNkYeOM",
+  apiKey: "AIzaSyD_HUTzo6I-X4rpDnoKArfPofSSHNkYeOM",
 
-    authDomain:
-    "you-chat-3896c.firebaseapp.com",
+  authDomain: "you-chat-3896c.firebaseapp.com",
 
-    projectId:
-    "you-chat-3896c",
+  databaseURL:
+    "https://you-chat-3896c-default-rtdb.firebaseio.com/",
 
-    storageBucket:
+  projectId: "you-chat-3896c",
+
+  storageBucket:
     "you-chat-3896c.firebasestorage.app",
 
-    messagingSenderId:
-    "874787277335",
+  messagingSenderId: "874787277335",
 
-    appId:
+  appId:
     "1:874787277335:web:f2a71f309a2f32ff60ea52",
 
-    measurementId:
-    "G-5S6HK3X836",
-
-    databaseURL:
-    "https://you-chat-3896c-default-rtdb.firebaseio.com/"
+  measurementId: "G-5S6HK3X836"
 
 };
 
-
-/* =========================================================
-   INITIALIZE FIREBASE
-========================================================= */
 
 firebase.initializeApp(firebaseConfig);
 
@@ -730,9 +665,9 @@ const auth = firebase.auth();
 const database = firebase.database();
 
 
-/* =========================================================
+/* =========================
    VARIABLES
-========================================================= */
+========================= */
 
 let currentUser = null;
 
@@ -745,1188 +680,1209 @@ let currentChatId = null;
 let messageListener = null;
 
 
-/* =========================================================
-   PLACEHOLDER
-========================================================= */
-
-const PLACEHOLDER =
-    "https://via.placeholder.com/100";
-
-
-/* =========================================================
-   REGISTER SCREEN
-========================================================= */
+/* =========================
+   LOGIN / REGISTER
+========================= */
 
 function showRegister(){
 
-    document.getElementById(
-        "registerFields"
-    ).style.display = "block";
+  document.getElementById("registerFields").style.display =
+    "block";
 
-    document.getElementById(
-        "loginButton"
-    ).innerText = "Account তৈরি করুন";
+  document.getElementById("loginButton").style.display =
+    "none";
 
-    document.getElementById(
-        "loginButton"
-    ).onclick = register;
+  document.getElementById("registerButton").innerText =
+    "Account তৈরি করুন";
 
-    document.getElementById(
-        "registerButton"
-    ).style.display = "none";
-
-    document.getElementById(
-        "authMessage"
-    ).innerText = "";
+  document.getElementById("registerButton").onclick =
+    register;
 
 }
 
 
-/* =========================================================
-   REGISTER
-========================================================= */
+function register(){
 
-async function register(){
+  const name =
+    document.getElementById("registerName").value.trim();
 
-    const name =
-        document.getElementById("name").value.trim();
+  const photo =
+    document.getElementById("registerPhoto").value.trim();
 
-    const photo =
-        document.getElementById("photo").value.trim();
+  const email =
+    document.getElementById("email").value.trim();
 
-    const email =
-        document.getElementById("email").value.trim();
+  const password =
+    document.getElementById("password").value;
 
-    const password =
-        document.getElementById("password").value;
 
+  if(!name){
 
-    if(!name){
+    showAuthMessage("আপনার নাম লিখুন");
 
-        showAuthMessage(
-            "আপনার নাম লিখুন।"
-        );
+    return;
+  }
 
-        return;
-    }
 
+  if(!email || !password){
 
-    if(!email){
+    showAuthMessage("Email এবং Password দিন");
 
-        showAuthMessage(
-            "Email লিখুন।"
-        );
+    return;
+  }
 
-        return;
-    }
 
+  auth.createUserWithEmailAndPassword(
+    email,
+    password
+  )
 
-    if(password.length < 6){
+  .then(result => {
 
-        showAuthMessage(
-            "Password কমপক্ষে ৬ অক্ষরের হতে হবে।"
-        );
+    const uid = result.user.uid;
 
-        return;
-    }
+    const profile = {
 
+      uid:uid,
 
-    try{
+      name:name,
 
-        showAuthMessage(
-            "Account তৈরি হচ্ছে..."
-        );
+      email:email,
 
+      photo:photo || "logo.png",
 
-        const result =
-            await auth.createUserWithEmailAndPassword(
-                email,
-                password
-            );
-
-
-        const user =
-            result.user;
-
-
-        const profile = {
-
-            uid:user.uid,
-
-            name:name,
-
-            email:email,
-
-            photo:photo || PLACEHOLDER,
-
-            createdAt:
-                firebase.database.ServerValue.TIMESTAMP
-
-        };
-
-
-        await database
-            .ref("users/" + user.uid)
-            .set(profile);
-
-
-        showAuthMessage(
-            "Account তৈরি হয়েছে।"
-        );
-
-
-    }catch(error){
-
-        showAuthMessage(
-            getFirebaseError(error)
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-async function login(){
-
-    const email =
-        document.getElementById("email").value.trim();
-
-    const password =
-        document.getElementById("password").value;
-
-
-    if(!email){
-
-        showAuthMessage(
-            "Email লিখুন।"
-        );
-
-        return;
-    }
-
-
-    if(!password){
-
-        showAuthMessage(
-            "Password লিখুন।"
-        );
-
-        return;
-    }
-
-
-    try{
-
-        showAuthMessage(
-            "Login হচ্ছে..."
-        );
-
-
-        await auth.signInWithEmailAndPassword(
-            email,
-            password
-        );
-
-
-    }catch(error){
-
-        showAuthMessage(
-            getFirebaseError(error)
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   FIREBASE ERROR
-========================================================= */
-
-function getFirebaseError(error){
-
-    if(error.code === "auth/invalid-email")
-        return "Email ঠিক নয়।";
-
-    if(error.code === "auth/user-not-found")
-        return "এই Email দিয়ে কোনো Account নেই।";
-
-    if(error.code === "auth/wrong-password")
-        return "Password ভুল।";
-
-    if(error.code === "auth/email-already-in-use")
-        return "এই Email দিয়ে Account আগে থেকেই আছে।";
-
-    if(error.code === "auth/weak-password")
-        return "Password আরও শক্তিশালী দিন।";
-
-    return error.message || "একটি সমস্যা হয়েছে।";
-
-}
-
-
-/* =========================================================
-   AUTH MESSAGE
-========================================================= */
-
-function showAuthMessage(message){
-
-    document.getElementById(
-        "authMessage"
-    ).innerText = message;
-
-}
-
-
-/* =========================================================
-   AUTH STATE
-========================================================= */
-
-auth.onAuthStateChanged(
-    async function(user){
-
-        if(user){
-
-            currentUser = user;
-
-
-            document.getElementById(
-                "loginScreen"
-            ).style.display = "none";
-
-
-            await loadMyProfile();
-
-
-            document.getElementById(
-                "userStatus"
-            ).innerText =
-                myProfile.name;
-
-
-            document.getElementById(
-                "profileImage"
-            ).src =
-                myProfile.photo || PLACEHOLDER;
-
-
-            loadRecentChats();
-
-
-        }else{
-
-            currentUser = null;
-
-            myProfile = null;
-
-            document.getElementById(
-                "loginScreen"
-            ).style.display = "flex";
-
-
-            document.getElementById(
-                "userStatus"
-            ).innerText =
-                "Login করুন";
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   LOAD MY PROFILE
-========================================================= */
-
-async function loadMyProfile(){
-
-    const snapshot =
-        await database
-        .ref("users/" + currentUser.uid)
-        .once("value");
-
-
-    if(snapshot.exists()){
-
-        myProfile =
-            snapshot.val();
-
-    }else{
-
-        myProfile = {
-
-            uid:currentUser.uid,
-
-            name:
-                currentUser.email.split("@")[0],
-
-            email:
-                currentUser.email,
-
-            photo:
-                PLACEHOLDER
-
-        };
-
-    }
-
-}
-
-
-/* =========================================================
-   SEARCH USERS
-========================================================= */
-
-async function searchUsers(){
-
-    const text =
-        document.getElementById(
-            "searchInput"
-        ).value.trim().toLowerCase();
-
-
-    const userList =
-        document.getElementById(
-            "userList"
-        );
-
-
-    userList.innerHTML = "";
-
-
-    if(!text){
-
-        userList.innerHTML =
-            "<div style='padding:15px;text-align:center;color:#777;'>User-এর নাম লিখুন।</div>";
-
-        return;
-    }
-
-
-    try{
-
-        const snapshot =
-            await database
-            .ref("users")
-            .once("value");
-
-
-        let found = false;
-
-
-        snapshot.forEach(
-            function(child){
-
-                const data =
-                    child.val();
-
-
-                if(
-                    data.uid !== currentUser.uid &&
-                    String(data.name || "")
-                        .toLowerCase()
-                        .includes(text)
-                ){
-
-                    found = true;
-
-                    createUserItem(
-                        data,
-                        userList
-                    );
-
-                }
-
-            }
-        );
-
-
-        if(!found){
-
-            userList.innerHTML =
-                "<div style='padding:15px;text-align:center;color:#777;'>কোনো User পাওয়া যায়নি।</div>";
-
-        }
-
-
-    }catch(error){
-
-        console.error(error);
-
-        userList.innerHTML =
-            "<div style='padding:15px;color:red;'>User Search করা যায়নি।</div>";
-
-    }
-
-}
-
-
-/* =========================================================
-   CREATE USER ITEM
-========================================================= */
-
-function createUserItem(
-    data,
-    container
-){
-
-    const item =
-        document.createElement("div");
-
-    item.className =
-        "userItem";
-
-
-    const image =
-        document.createElement("img");
-
-    image.src =
-        data.photo || PLACEHOLDER;
-
-
-    const info =
-        document.createElement("div");
-
-    info.className =
-        "userInfo";
-
-
-    const name =
-        document.createElement("div");
-
-    name.className =
-        "userName";
-
-    name.innerText =
-        data.name || "User";
-
-
-    const email =
-        document.createElement("div");
-
-    email.className =
-        "userEmail";
-
-    email.innerText =
-        data.email || "";
-
-
-    info.appendChild(name);
-
-    info.appendChild(email);
-
-
-    const button =
-        document.createElement("button");
-
-    button.className =
-        "chatButton";
-
-    button.innerText =
-        "Chat";
-
-
-    button.onclick =
-        function(){
-
-            openChat(data);
-
-        };
-
-
-    item.appendChild(image);
-
-    item.appendChild(info);
-
-    item.appendChild(button);
-
-
-    container.appendChild(item);
-
-}
-
-
-/* =========================================================
-   CHAT ID
-========================================================= */
-
-function getChatId(uid1, uid2){
-
-    return [uid1, uid2]
-        .sort()
-        .join("_");
-
-}
-
-
-/* =========================================================
-   OPEN CHAT
-========================================================= */
-
-async function openChat(user){
-
-    selectedUser =
-        user;
-
-
-    currentChatId =
-        getChatId(
-            currentUser.uid,
-            user.uid
-        );
-
-
-    document.getElementById(
-        "welcome"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "chatHeader"
-    ).style.display = "flex";
-
-
-    document.getElementById(
-        "chatArea"
-    ).style.display = "block";
-
-
-    document.getElementById(
-        "chatName"
-    ).innerText =
-        user.name || "User";
-
-
-    document.getElementById(
-        "chatImage"
-    ).src =
-        user.photo || PLACEHOLDER;
-
-
-    await prepareChat();
-
-
-    loadMessages();
-
-
-    document.getElementById(
-        "messageInput"
-    ).focus();
-
-}
-
-
-/* =========================================================
-   PREPARE CHAT
-========================================================= */
-
-async function prepareChat(){
-
-    const chatRef =
-        database.ref(
-            "chats/" + currentChatId
-        );
-
-
-    const snapshot =
-        await chatRef.once("value");
-
-
-    if(!snapshot.exists()){
-
-        await chatRef.child(
-            "members/" + currentUser.uid
-        ).set(true);
-
-
-        await chatRef.child(
-            "members/" + selectedUser.uid
-        ).set(true);
-
-    }
-
-}
-
-
-/* =========================================================
-   LOAD MESSAGES
-========================================================= */
-
-function loadMessages(){
-
-    const messages =
-        document.getElementById(
-            "messages"
-        );
-
-
-    messages.innerHTML = "";
-
-
-    if(messageListener){
-
-        database
-        .ref(
-            "chats/" +
-            currentChatId +
-            "/messages"
-        )
-        .off(
-            "child_added",
-            messageListener
-        );
-
-    }
-
-
-    messageListener =
-        function(snapshot){
-
-            const data =
-                snapshot.val();
-
-
-            showMessage(data);
-
-        };
-
-
-    database
-    .ref(
-        "chats/" +
-        currentChatId +
-        "/messages"
-    )
-    .on(
-        "child_added",
-        messageListener
-    );
-
-}
-
-
-/* =========================================================
-   SHOW MESSAGE
-========================================================= */
-
-function showMessage(data){
-
-    const messages =
-        document.getElementById(
-            "messages"
-        );
-
-
-    const row =
-        document.createElement("div");
-
-
-    const mine =
-        data.senderId === currentUser.uid;
-
-
-    row.className =
-        "messageRow " +
-        (mine ? "mine" : "other");
-
-
-    const box =
-        document.createElement("div");
-
-    box.className =
-        "message";
-
-
-    const name =
-        document.createElement("div");
-
-    name.className =
-        "messageName";
-
-
-    name.innerText =
-        data.name || "User";
-
-
-    const text =
-        document.createElement("div");
-
-    text.className =
-        "messageText";
-
-
-    text.innerText =
-        data.text || "";
-
-
-    const time =
-        document.createElement("div");
-
-    time.className =
-        "messageTime";
-
-
-    time.innerText =
-        formatTime(
-            data.createdAt
-        );
-
-
-    box.appendChild(name);
-
-    box.appendChild(text);
-
-    box.appendChild(time);
-
-
-    row.appendChild(box);
-
-
-    messages.appendChild(row);
-
-
-    messages.scrollTop =
-        messages.scrollHeight;
-
-}
-
-
-/* =========================================================
-   SEND MESSAGE
-========================================================= */
-
-async function sendMessage(){
-
-    if(!currentUser){
-
-        alert("আগে Login করুন।");
-
-        return;
-    }
-
-
-    if(!selectedUser){
-
-        alert("আগে একজন User-এর Chat খুলুন।");
-
-        return;
-    }
-
-
-    const input =
-        document.getElementById(
-            "messageInput"
-        );
-
-
-    const text =
-        input.value.trim();
-
-
-    if(!text){
-
-        return;
-    }
-
-
-    if(!currentChatId){
-
-        alert("Chat প্রস্তুত হয়নি।");
-
-        return;
-    }
-
-
-    const message = {
-
-        senderId:
-            currentUser.uid,
-
-        receiverId:
-            selectedUser.uid,
-
-        name:
-            myProfile.name || "User",
-
-        text:
-            text,
-
-        createdAt:
-            firebase.database.ServerValue.TIMESTAMP
+      createdAt:Date.now()
 
     };
 
 
-    try{
+    return database
+      .ref("users/" + uid)
+      .set(profile);
 
-        /* MESSAGE SAVE */
+  })
 
-        await database
-        .ref(
-            "chats/" +
-            currentChatId +
-            "/messages"
-        )
-        .push(message);
+  .then(() => {
 
+    showAuthMessage("Account তৈরি হয়েছে");
 
-        /* RECENT CHAT - আমার তালিকায় */
+  })
 
-        await database
-        .ref(
-            "recentChats/" +
-            currentUser.uid +
-            "/" +
-            selectedUser.uid
-        )
-        .set({
+  .catch(error => {
 
-            uid:
-                selectedUser.uid,
+    showAuthMessage(error.message);
 
-            name:
-                selectedUser.name || "User",
-
-            photo:
-                selectedUser.photo || PLACEHOLDER,
-
-            updatedAt:
-                firebase.database.ServerValue.TIMESTAMP
-
-        });
-
-
-        /* RECENT CHAT - অন্য User-এর তালিকায় */
-
-        await database
-        .ref(
-            "recentChats/" +
-            selectedUser.uid +
-            "/" +
-            currentUser.uid
-        )
-        .set({
-
-            uid:
-                currentUser.uid,
-
-            name:
-                myProfile.name || "User",
-
-            photo:
-                myProfile.photo || PLACEHOLDER,
-
-            updatedAt:
-                firebase.database.ServerValue.TIMESTAMP
-
-        });
-
-
-        input.value = "";
-
-
-        loadRecentChats();
-
-
-    }catch(error){
-
-        console.error(
-            "Message Error:",
-            error
-        );
-
-
-        alert(
-            "Message পাঠাতে সমস্যা হয়েছে। Firebase Rules পরীক্ষা করুন।"
-        );
-
-    }
+  });
 
 }
 
 
-/* =========================================================
-   LOAD RECENT CHATS
-========================================================= */
+function login(){
 
-function loadRecentChats(){
+  const email =
+    document.getElementById("email").value.trim();
 
-    const container =
-        document.getElementById(
-            "recentChats"
-        );
+  const password =
+    document.getElementById("password").value;
 
 
-    container.innerHTML = "";
+  if(!email || !password){
+
+    showAuthMessage("Email এবং Password দিন");
+
+    return;
+
+  }
 
 
-    if(!currentUser){
+  auth.signInWithEmailAndPassword(
+    email,
+    password
+  )
 
-        return;
-    }
+  .catch(error => {
+
+    showAuthMessage(error.message);
+
+  });
+
+}
+
+
+function showAuthMessage(text){
+
+  document.getElementById("authMessage").innerText =
+    text;
+
+}
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+auth.onAuthStateChanged(user => {
+
+  if(user){
+
+    currentUser = user;
+
+    document.getElementById("loginScreen").style.display =
+      "none";
 
 
     database
-    .ref(
-        "recentChats/" +
-        currentUser.uid
-    )
-    .orderByChild("updatedAt")
-    .limitToLast(30)
-    .once("value")
-    .then(
-        function(snapshot){
+      .ref("users/" + user.uid)
+      .once("value")
 
-            const list = [];
+      .then(snapshot => {
+
+        myProfile = snapshot.val();
 
 
-            snapshot.forEach(
-                function(child){
+        if(!myProfile){
 
-                    list.push(
-                        child.val()
-                    );
+          myProfile = {
 
-                }
-            );
+            uid:user.uid,
 
+            name:user.email.split("@")[0],
 
-            list.reverse();
+            email:user.email,
 
+            photo:"logo.png",
 
-            if(list.length === 0){
+            createdAt:Date.now()
 
-                container.innerHTML =
-                    "<div style='padding:12px;text-align:center;color:#777;'>এখনো কোনো Recent Chat নেই।</div>";
+          };
 
-                return;
-
-            }
-
-
-            list.forEach(
-                function(data){
-
-                    createRecentItem(
-                        data,
-                        container
-                    );
-
-                }
-            );
+          return database
+            .ref("users/" + user.uid)
+            .set(myProfile);
 
         }
-    )
-    .catch(
-        function(error){
 
-            console.error(
-                error
-            );
+      })
 
-        }
-    );
+      .then(() => {
+
+        updateHeader();
+
+        loadFriends();
+
+        loadRecentChats();
+
+      });
+
+  }
+
+  else{
+
+    currentUser = null;
+
+    myProfile = null;
+
+    document.getElementById("loginScreen").style.display =
+      "flex";
+
+  }
+
+});
+
+
+/* =========================
+   HEADER
+========================= */
+
+function updateHeader(){
+
+  document.getElementById("userStatus").innerText =
+    myProfile.name;
+
+
+  document.getElementById("profileImage").src =
+    myProfile.photo || "logo.png";
 
 }
 
 
-/* =========================================================
-   CREATE RECENT ITEM
-========================================================= */
+/* =========================
+   SEARCH USERS
+========================= */
 
-function createRecentItem(
-    data,
-    container
-){
+function searchUsers(){
 
-    const item =
-        document.createElement("div");
-
-    item.className =
-        "recentItem";
+  const text =
+    document.getElementById("searchInput").value
+    .trim()
+    .toLowerCase();
 
 
-    const image =
-        document.createElement("img");
-
-    image.src =
-        data.photo || PLACEHOLDER;
+  const list =
+    document.getElementById("userList");
 
 
-    const info =
-        document.createElement("div");
-
-    info.className =
-        "userInfo";
+  list.innerHTML = "";
 
 
-    const name =
-        document.createElement("div");
+  if(!text){
 
-    name.className =
-        "userName";
+    list.innerHTML =
+      '<div class="empty">নাম লিখে Search করুন</div>';
 
-    name.innerText =
-        data.name || "User";
+    return;
 
-
-    const small =
-        document.createElement("div");
-
-    small.className =
-        "userEmail";
-
-    small.innerText =
-        "💬 Chat";
+  }
 
 
-    info.appendChild(name);
+  database
+    .ref("users")
+    .once("value")
 
-    info.appendChild(small);
+    .then(snapshot => {
+
+      let found = false;
 
 
-    item.appendChild(image);
+      snapshot.forEach(child => {
 
-    item.appendChild(info);
+        const user = child.val();
 
 
-    item.onclick =
-        async function(){
+        if(
+          user.uid !== currentUser.uid &&
+          user.name &&
+          user.name.toLowerCase().includes(text)
+        ){
 
-            try{
+          found = true;
 
-                const snapshot =
-                    await database
-                    .ref(
-                        "users/" +
-                        data.uid
-                    )
-                    .once("value");
+          showSearchUser(user);
 
+        }
+
+      });
+
+
+      if(!found){
+
+        list.innerHTML =
+          '<div class="empty">কোনো User পাওয়া যায়নি</div>';
+
+      }
+
+    });
+
+}
+
+
+/* =========================
+   SHOW SEARCH USER
+========================= */
+
+function showSearchUser(user){
+
+  const list =
+    document.getElementById("userList");
+
+
+  const item =
+    document.createElement("div");
+
+  item.className = "userItem";
+
+
+  const img =
+    document.createElement("img");
+
+  img.src =
+    user.photo || "logo.png";
+
+
+  const info =
+    document.createElement("div");
+
+  info.className = "userInfo";
+
+
+  const name =
+    document.createElement("div");
+
+  name.className = "userName";
+
+  name.innerText =
+    user.name || "User";
+
+
+  const email =
+    document.createElement("div");
+
+  email.className = "userEmail";
+
+  email.innerText =
+    user.email || "";
+
+
+  info.appendChild(name);
+
+  info.appendChild(email);
+
+
+  const button =
+    document.createElement("button");
+
+  button.className =
+    "actionButton addFriend";
+
+  button.innerText =
+    "➕ Friend";
+
+
+  checkFriend(user.uid)
+    .then(isFriend => {
+
+      if(isFriend){
+
+        button.innerText =
+          "💬 Chat";
+
+        button.className =
+          "actionButton chatButton";
+
+        button.onclick =
+          () => openChat(user);
+
+      }
+
+      else{
+
+        button.onclick =
+          () => addFriend(user);
+
+      }
+
+    });
+
+
+  item.appendChild(img);
+
+  item.appendChild(info);
+
+  item.appendChild(button);
+
+
+  list.appendChild(item);
+
+}
+
+
+/* =========================
+   CHECK FRIEND
+========================= */
+
+function checkFriend(uid){
+
+  return database
+    .ref(
+      "friends/" +
+      currentUser.uid +
+      "/" +
+      uid
+    )
+    .once("value")
+
+    .then(snapshot => snapshot.exists());
+
+}
+
+
+/* =========================
+   ADD FRIEND
+========================= */
+
+function addFriend(user){
+
+  if(!currentUser){
+
+    return;
+
+  }
+
+
+  const updates = {};
+
+
+  updates[
+    "friends/" +
+    currentUser.uid +
+    "/" +
+    user.uid
+  ] = {
+
+    uid:user.uid,
+
+    name:user.name,
+
+    email:user.email,
+
+    photo:user.photo || "logo.png",
+
+    addedAt:Date.now()
+
+  };
+
+
+  updates[
+    "friends/" +
+    user.uid +
+    "/" +
+    currentUser.uid
+  ] = {
+
+    uid:currentUser.uid,
+
+    name:myProfile.name,
+
+    email:myProfile.email,
+
+    photo:myProfile.photo || "logo.png",
+
+    addedAt:Date.now()
+
+  };
+
+
+  database
+    .ref()
+    .update(updates)
+
+    .then(() => {
+
+      alert(
+        user.name +
+        " এখন আপনার Friend ✅"
+      );
+
+
+      loadFriends();
+
+      searchUsers();
+
+    })
+
+    .catch(error => {
+
+      alert(
+        "Friend তৈরি করা যায়নি: " +
+        error.message
+      );
+
+    });
+
+}
+
+
+/* =========================
+   LOAD FRIENDS
+========================= */
+
+function loadFriends(){
+
+  const list =
+    document.getElementById("friendList");
+
+
+  list.innerHTML = "";
+
+
+  database
+    .ref(
+      "friends/" +
+      currentUser.uid
+    )
+    .once("value")
+
+    .then(snapshot => {
+
+      if(!snapshot.exists()){
+
+        list.innerHTML =
+          '<div class="empty">এখনো কোনো Friend নেই</div>';
+
+        return;
+
+      }
+
+
+      snapshot.forEach(child => {
+
+        const friend =
+          child.val();
+
+
+        const item =
+          document.createElement("div");
+
+        item.className =
+          "friendItem";
+
+
+        const img =
+          document.createElement("img");
+
+        img.src =
+          friend.photo || "logo.png";
+
+
+        const info =
+          document.createElement("div");
+
+        info.className =
+          "userInfo";
+
+
+        const name =
+          document.createElement("div");
+
+        name.className =
+          "userName";
+
+        name.innerText =
+          friend.name || "User";
+
+
+        info.appendChild(name);
+
+
+        const button =
+          document.createElement("button");
+
+        button.className =
+          "actionButton chatButton";
+
+        button.innerText =
+          "💬 Chat";
+
+
+        button.onclick =
+          () => openChat(friend);
+
+
+        item.appendChild(img);
+
+        item.appendChild(info);
+
+        item.appendChild(button);
+
+
+        list.appendChild(item);
+
+      });
+
+    });
+
+}
+
+
+/* =========================
+   CHAT ID
+========================= */
+
+function getChatId(uid1,uid2){
+
+  return [uid1,uid2]
+    .sort()
+    .join("_");
+
+}
+
+
+/* =========================
+   OPEN CHAT
+========================= */
+
+function openChat(user){
+
+  selectedUser = user;
+
+
+  currentChatId =
+    getChatId(
+      currentUser.uid,
+      user.uid
+    );
+
+
+  document.getElementById("chatArea").style.display =
+    "block";
+
+
+  document.getElementById("welcome").style.display =
+    "none";
+
+
+  document.getElementById("chatName").innerText =
+    user.name || "User";
+
+
+  document.getElementById("chatImage").src =
+    user.photo || "logo.png";
+
+
+  document.getElementById("messages").innerHTML = "";
+
+
+  prepareChat();
+
+
+  setTimeout(() => {
+
+    document
+      .getElementById("messageInput")
+      .focus();
+
+  },200);
+
+}
+
+
+/* =========================
+   PREPARE CHAT
+========================= */
+
+function prepareChat(){
+
+  const chatRef =
+    database.ref(
+      "chats/" +
+      currentChatId
+    );
+
+
+  chatRef.once("value")
+  .then(snapshot => {
+
+    if(!snapshot.exists()){
+
+      return chatRef.set({
+
+        members:{
+
+          [currentUser.uid]:true,
+
+          [selectedUser.uid]:true
+
+        },
+
+        createdAt:Date.now()
+
+      });
+
+    }
+
+  })
+
+  .then(() => {
+
+    loadMessages();
+
+  });
+
+}
+
+
+/* =========================
+   LOAD MESSAGES
+========================= */
+
+function loadMessages(){
+
+  const messagesRef =
+    database
+      .ref(
+        "chats/" +
+        currentChatId +
+        "/messages"
+      )
+      .orderByChild("createdAt");
+
+
+  if(messageListener){
+
+    messageListener();
+
+  }
+
+
+  const callback =
+    messagesRef.on(
+      "value",
+      snapshot => {
+
+        const box =
+          document.getElementById("messages");
+
+
+        box.innerHTML = "";
+
+
+        snapshot.forEach(child => {
+
+          const data =
+            child.val();
+
+
+          showMessage(data,box);
+
+        });
+
+
+        box.scrollTop =
+          box.scrollHeight;
+
+      }
+    );
+
+
+  messageListener =
+    () => {
+
+      database
+        .ref(
+          "chats/" +
+          currentChatId +
+          "/messages"
+        )
+        .off("value",callback);
+
+    };
+
+}
+
+
+/* =========================
+   SHOW MESSAGE
+========================= */
+
+function showMessage(data,box){
+
+  const row =
+    document.createElement("div");
+
+
+  const mine =
+    data.senderId === currentUser.uid;
+
+
+  row.className =
+    "messageRow " +
+    (mine ? "mine" : "other");
+
+
+  const bubble =
+    document.createElement("div");
+
+  bubble.className =
+    "messageBubble";
+
+
+  const name =
+    document.createElement("div");
+
+  name.className =
+    "messageName";
+
+  name.innerText =
+    data.name || "User";
+
+
+  const text =
+    document.createElement("div");
+
+  text.innerText =
+    data.text || "";
+
+
+  const time =
+    document.createElement("div");
+
+  time.className =
+    "messageTime";
+
+
+  if(data.createdAt){
+
+    time.innerText =
+      new Date(
+        data.createdAt
+      ).toLocaleTimeString(
+        "bn-BD",
+        {
+          hour:"2-digit",
+          minute:"2-digit"
+        }
+      );
+
+  }
+
+
+  bubble.appendChild(name);
+
+  bubble.appendChild(text);
+
+  bubble.appendChild(time);
+
+  row.appendChild(bubble);
+
+  box.appendChild(row);
+
+}
+
+
+/* =========================
+   SEND MESSAGE
+========================= */
+
+function sendMessage(){
+
+  if(!currentUser){
+
+    alert("আগে Login করুন");
+
+    return;
+
+  }
+
+
+  if(!selectedUser){
+
+    alert("আগে একজন Friend-এর Chat খুলুন");
+
+    return;
+
+  }
+
+
+  const input =
+    document.getElementById("messageInput");
+
+
+  const text =
+    input.value.trim();
+
+
+  if(!text){
+
+    return;
+
+  }
+
+
+  const messageRef =
+    database
+      .ref(
+        "chats/" +
+        currentChatId +
+        "/messages"
+      )
+      .push();
+
+
+  const message = {
+
+    senderId:currentUser.uid,
+
+    receiverId:selectedUser.uid,
+
+    name:myProfile.name,
+
+    text:text,
+
+    createdAt:Date.now()
+
+  };
+
+
+  messageRef.set(message)
+
+  .then(() => {
+
+    input.value = "";
+
+    input.focus();
+
+
+    updateRecentChat(
+      selectedUser
+    );
+
+  })
+
+  .catch(error => {
+
+    alert(
+      "Message পাঠানো যায়নি: " +
+      error.message
+    );
+
+  });
+
+}
+
+
+/* =========================
+   ENTER TO SEND
+========================= */
+
+document
+  .getElementById("messageInput")
+  .addEventListener(
+    "keydown",
+    function(event){
+
+      if(
+        event.key === "Enter"
+      ){
+
+        event.preventDefault();
+
+        sendMessage();
+
+      }
+
+    }
+  );
+
+
+/* =========================
+   RECENT CHAT
+========================= */
+
+function updateRecentChat(user){
+
+  const updates = {};
+
+
+  updates[
+    "recentChats/" +
+    currentUser.uid +
+    "/" +
+    user.uid
+  ] = {
+
+    uid:user.uid,
+
+    name:user.name,
+
+    photo:user.photo || "logo.png",
+
+    updatedAt:Date.now()
+
+  };
+
+
+  updates[
+    "recentChats/" +
+    user.uid +
+    "/" +
+    currentUser.uid
+  ] = {
+
+    uid:currentUser.uid,
+
+    name:myProfile.name,
+
+    photo:myProfile.photo || "logo.png",
+
+    updatedAt:Date.now()
+
+  };
+
+
+  database
+    .ref()
+    .update(updates)
+
+    .then(() => {
+
+      loadRecentChats();
+
+    });
+
+}
+
+
+/* =========================
+   LOAD RECENT CHATS
+========================= */
+
+function loadRecentChats(){
+
+  const list =
+    document.getElementById("recentList");
+
+
+  list.innerHTML = "";
+
+
+  database
+    .ref(
+      "recentChats/" +
+      currentUser.uid
+    )
+    .orderByChild("updatedAt")
+    .once("value")
+
+    .then(snapshot => {
+
+      if(!snapshot.exists()){
+
+        list.innerHTML =
+          '<div class="empty">এখনো কোনো Recent Chat নেই</div>';
+
+        return;
+
+      }
+
+
+      const chats = [];
+
+
+      snapshot.forEach(child => {
+
+        chats.push(child.val());
+
+      });
+
+
+      chats.reverse();
+
+
+      chats.forEach(user => {
+
+        const item =
+          document.createElement("div");
+
+        item.className =
+          "recentItem";
+
+
+        const img =
+          document.createElement("img");
+
+        img.src =
+          user.photo || "logo.png";
+
+
+        const info =
+          document.createElement("div");
+
+        info.className =
+          "userInfo";
+
+
+        const name =
+          document.createElement("div");
+
+        name.className =
+          "userName";
+
+        name.innerText =
+          user.name || "User";
+
+
+        info.appendChild(name);
+
+
+        const button =
+          document.createElement("button");
+
+        button.className =
+          "actionButton chatButton";
+
+        button.innerText =
+          "💬 Chat";
+
+
+        button.onclick =
+          () => {
+
+            database
+              .ref(
+                "users/" +
+                user.uid
+              )
+              .once("value")
+              .then(snapshot => {
 
                 if(snapshot.exists()){
 
-                    openChat(
-                        snapshot.val()
-                    );
-
-                }else{
-
-                    openChat({
-                        uid:data.uid,
-                        name:data.name,
-                        photo:data.photo
-                    });
+                  openChat(
+                    snapshot.val()
+                  );
 
                 }
 
-            }catch(error){
+              });
 
-                console.error(error);
-
-            }
-
-        };
+          };
 
 
-    container.appendChild(item);
+        item.appendChild(img);
 
-}
+        item.appendChild(info);
 
-
-/* =========================================================
-   FORMAT TIME
-========================================================= */
-
-function formatTime(timestamp){
-
-    if(!timestamp){
-
-        return "";
-
-    }
+        item.appendChild(button);
 
 
-    const date =
-        new Date(timestamp);
+        list.appendChild(item);
 
+      });
 
-    return date.toLocaleTimeString(
-        "bn-BD",
-        {
-            hour:"2-digit",
-            minute:"2-digit"
-        }
-    );
+    });
 
 }
 
 
-/* =========================================================
+/* =========================
+   CLOSE CHAT
+========================= */
+
+function closeChat(){
+
+  document.getElementById("chatArea").style.display =
+    "none";
+
+
+  selectedUser = null;
+
+  currentChatId = null;
+
+
+  if(messageListener){
+
+    messageListener();
+
+    messageListener = null;
+
+  }
+
+
+  document.getElementById("welcome").style.display =
+    "block";
+
+}
+
+
+/* =========================
    LOGOUT
-========================================================= */
+========================= */
 
-async function logout(){
+function logout(){
 
-    if(messageListener && currentChatId){
-
-        database
-        .ref(
-            "chats/" +
-            currentChatId +
-            "/messages"
-        )
-        .off(
-            "child_added",
-            messageListener
-        );
-
-    }
-
-
-    await auth.signOut();
-
-
-    document.getElementById(
-        "chatArea"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "chatHeader"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "welcome"
-    ).style.display = "flex";
-
-
-    document.getElementById(
-        "userList"
-    ).innerHTML = "";
-
-
-    document.getElementById(
-        "recentChats"
-    ).innerHTML = "";
+  auth.signOut();
 
 }
-
-
-/* =========================================================
-   INITIAL SCREEN
-========================================================= */
-
-document.getElementById(
-    "welcome"
-).style.display = "flex";
-
 
 </script>
 
