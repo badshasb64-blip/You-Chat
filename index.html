@@ -1553,17 +1553,13 @@ function showMessage(data,box){
 function sendMessage(){
 
   if(!currentUser){
-
     alert("আগে Login করুন");
     return;
-
   }
 
   if(!selectedUser){
-
     alert("আগে একজন Friend-এর Chat খুলুন");
     return;
-
   }
 
   const input =
@@ -1573,9 +1569,7 @@ function sendMessage(){
     input.value.trim();
 
   if(!text){
-
     return;
-
   }
 
   const messageRef =
