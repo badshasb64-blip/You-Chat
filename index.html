@@ -1578,78 +1578,30 @@ function sendMessage(){
 
   }
 
-  const chatRef =
-    database.ref(
-      "chats/" + currentChatId
-    );
+  const messageRef =
+    database
+      .ref(
+        "chats/" +
+        currentChatId +
+        "/messages"
+      )
+      .push();
 
-  chatRef.once("value")
-    .then(snapshot => {
+  const message = {
 
-      if(!snapshot.exists()){
+    senderId: currentUser.uid,
 
-        return chatRef.set({
+    receiverId: selectedUser.uid,
 
-          members:{
-            [currentUser.uid]:true,
-            [selectedUser.uid]:true
-          },
+    name: myProfile.name || "User",
 
-          createdAt:Date.now()
+    text: text,
 
-        });
+    createdAt: Date.now()
 
-      }
+  };
 
-      const data = snapshot.val() || {};
-
-      if(
-        !data.members ||
-        data.members[currentUser.uid] !== true ||
-        data.members[selectedUser.uid] !== true
-      ){
-
-        return chatRef.update({
-
-          members:{
-            [currentUser.uid]:true,
-            [selectedUser.uid]:true
-          }
-
-        });
-
-      }
-
-    })
-
-    .then(() => {
-
-      const messageRef =
-        database
-          .ref(
-            "chats/" +
-            currentChatId +
-            "/messages"
-          )
-          .push();
-
-      const message = {
-
-        senderId:currentUser.uid,
-
-        receiverId:selectedUser.uid,
-
-        name:myProfile.name,
-
-        text:text,
-
-        createdAt:Date.now()
-
-      };
-
-      return messageRef.set(message);
-
-    })
+  messageRef.set(message)
 
     .then(() => {
 
@@ -1663,7 +1615,10 @@ function sendMessage(){
 
     .catch(error => {
 
-      console.error("Send Message Error:", error);
+      console.error(
+        "Send Message Error:",
+        error
+      );
 
       alert(
         "Message পাঠানো যায়নি: " +
@@ -1673,6 +1628,7 @@ function sendMessage(){
     });
 
 }
+      
 
 
 /* =========================
