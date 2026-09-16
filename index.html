@@ -1347,41 +1347,53 @@ function openChat(user){
 
 function prepareChat(){
 
-  const chatRef =
-    database.ref(
-      "chats/" +
-      currentChatId
-    );
+  const chatRef = database.ref(
+    "chats/" + currentChatId
+  );
 
+  const members = {
+    [currentUser.uid]: true,
+    [selectedUser.uid]: true
+  };
 
   chatRef.once("value")
-  .then(snapshot => {
+    .then(snapshot => {
 
-    if(!snapshot.exists()){
+      if(!snapshot.exists()){
 
-      return chatRef.set({
+        return chatRef.set({
+          members: members,
+          createdAt: Date.now()
+        });
 
-        members:{
+      }
 
-          [currentUser.uid]:true,
+      const data = snapshot.val() || {};
 
-          [selectedUser.uid]:true
+      if(!data.members){
 
-        },
+        return chatRef.update({
+          members: members
+        });
 
-        createdAt:Date.now()
+      }
 
-      });
+    })
+    .then(() => {
 
-    }
+      loadMessages();
 
-  })
+    })
+    .catch(error => {
 
-  .then(() => {
+      console.error("Prepare Chat Error:", error);
 
-    loadMessages();
+      alert(
+        "Chat তৈরি করা যায়নি: " +
+        error.message
+      );
 
-  });
+    });
 
 }
 
@@ -1543,28 +1555,22 @@ function sendMessage(){
   if(!currentUser){
 
     alert("আগে Login করুন");
-
     return;
 
   }
-
 
   if(!selectedUser){
 
     alert("আগে একজন Friend-এর Chat খুলুন");
-
     return;
 
   }
 
-
   const input =
     document.getElementById("messageInput");
 
-
   const text =
     input.value.trim();
-
 
   if(!text){
 
@@ -1572,55 +1578,99 @@ function sendMessage(){
 
   }
 
-
-  const messageRef =
-    database
-      .ref(
-        "chats/" +
-        currentChatId +
-        "/messages"
-      )
-      .push();
-
-
-  const message = {
-
-    senderId:currentUser.uid,
-
-    receiverId:selectedUser.uid,
-
-    name:myProfile.name,
-
-    text:text,
-
-    createdAt:Date.now()
-
-  };
-
-
-  messageRef.set(message)
-
-  .then(() => {
-
-    input.value = "";
-
-    input.focus();
-
-
-    updateRecentChat(
-      selectedUser
+  const chatRef =
+    database.ref(
+      "chats/" + currentChatId
     );
 
-  })
+  chatRef.once("value")
+    .then(snapshot => {
 
-  .catch(error => {
+      if(!snapshot.exists()){
 
-    alert(
-      "Message পাঠানো যায়নি: " +
-      error.message
-    );
+        return chatRef.set({
 
-  });
+          members:{
+            [currentUser.uid]:true,
+            [selectedUser.uid]:true
+          },
+
+          createdAt:Date.now()
+
+        });
+
+      }
+
+      const data = snapshot.val() || {};
+
+      if(
+        !data.members ||
+        data.members[currentUser.uid] !== true ||
+        data.members[selectedUser.uid] !== true
+      ){
+
+        return chatRef.update({
+
+          members:{
+            [currentUser.uid]:true,
+            [selectedUser.uid]:true
+          }
+
+        });
+
+      }
+
+    })
+
+    .then(() => {
+
+      const messageRef =
+        database
+          .ref(
+            "chats/" +
+            currentChatId +
+            "/messages"
+          )
+          .push();
+
+      const message = {
+
+        senderId:currentUser.uid,
+
+        receiverId:selectedUser.uid,
+
+        name:myProfile.name,
+
+        text:text,
+
+        createdAt:Date.now()
+
+      };
+
+      return messageRef.set(message);
+
+    })
+
+    .then(() => {
+
+      input.value = "";
+
+      input.focus();
+
+      updateRecentChat(selectedUser);
+
+    })
+
+    .catch(error => {
+
+      console.error("Send Message Error:", error);
+
+      alert(
+        "Message পাঠানো যায়নি: " +
+        error.message
+      );
+
+    });
 
 }
 
