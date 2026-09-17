@@ -1347,6 +1347,10 @@ function openChat(user){
 
 function prepareChat(){
 
+  if(!currentUser || !selectedUser){
+    return;
+  }
+
   const chatRef = database.ref(
     "chats/" + currentChatId
   );
@@ -1359,6 +1363,7 @@ function prepareChat(){
   chatRef.once("value")
     .then(snapshot => {
 
+      // Chat না থাকলে নতুন Chat তৈরি হবে
       if(!snapshot.exists()){
 
         return chatRef.set({
@@ -1368,15 +1373,8 @@ function prepareChat(){
 
       }
 
-      const data = snapshot.val() || {};
-
-      if(!data.members){
-
-        return chatRef.update({
-          members: members
-        });
-
-      }
+      // Chat আগে থেকেই থাকলে কিছু পরিবর্তন করার দরকার নেই
+      return null;
 
     })
     .then(() => {
@@ -1386,7 +1384,10 @@ function prepareChat(){
     })
     .catch(error => {
 
-      console.error("Prepare Chat Error:", error);
+      console.error(
+        "Prepare Chat Error:",
+        error
+      );
 
       alert(
         "Chat তৈরি করা যায়নি: " +
@@ -1397,12 +1398,15 @@ function prepareChat(){
 
 }
 
-
 /* =========================
    LOAD MESSAGES
 ========================= */
 
 function loadMessages(){
+
+  if(!currentChatId){
+    return;
+  }
 
   const messagesRef =
     database
@@ -1414,55 +1418,60 @@ function loadMessages(){
       .orderByChild("createdAt");
 
 
+  // আগের listener বন্ধ করা
   if(messageListener){
 
     messageListener();
 
+    messageListener = null;
+
   }
 
 
-  const callback =
-    messagesRef.on(
+  const callback = function(snapshot){
+
+    const box =
+      document.getElementById("messages");
+
+
+    if(!box){
+      return;
+    }
+
+
+    box.innerHTML = "";
+
+
+    snapshot.forEach(child => {
+
+      const data =
+        child.val();
+
+      showMessage(data, box);
+
+    });
+
+
+    box.scrollTop =
+      box.scrollHeight;
+
+  };
+
+
+  messagesRef.on(
+    "value",
+    callback
+  );
+
+
+  messageListener = function(){
+
+    messagesRef.off(
       "value",
-      snapshot => {
-
-        const box =
-          document.getElementById("messages");
-
-
-        box.innerHTML = "";
-
-
-        snapshot.forEach(child => {
-
-          const data =
-            child.val();
-
-
-          showMessage(data,box);
-
-        });
-
-
-        box.scrollTop =
-          box.scrollHeight;
-
-      }
+      callback
     );
 
-
-  messageListener =
-    () => {
-
-      database
-        .ref(
-          "chats/" +
-          currentChatId +
-          "/messages"
-        )
-        .off("value",callback);
-
-    };
+  };
 
 }
 
@@ -1545,7 +1554,6 @@ function showMessage(data,box){
 
 }
 
-
 /* =========================
    SEND MESSAGE
 ========================= */
@@ -1553,24 +1561,63 @@ function showMessage(data,box){
 function sendMessage(){
 
   if(!currentUser){
+
     alert("আগে Login করুন");
+
     return;
+
   }
+
 
   if(!selectedUser){
-    alert("আগে একজন Friend-এর Chat খুলুন");
+
+    alert(
+      "আগে একজন Friend-এর Chat খুলুন"
+    );
+
     return;
+
   }
 
+
+  if(!currentChatId){
+
+    alert(
+      "Chat পাওয়া যায়নি। আবার Chat খুলুন।"
+    );
+
+    return;
+
+  }
+
+
   const input =
-    document.getElementById("messageInput");
+    document.getElementById(
+      "messageInput"
+    );
+
+
+  if(!input){
+
+    alert(
+      "Message input পাওয়া যায়নি"
+    );
+
+    return;
+
+  }
+
 
   const text =
     input.value.trim();
 
+
   if(!text){
+
     return;
+
   }
+
 
   const messageRef =
     database
@@ -1581,21 +1628,29 @@ function sendMessage(){
       )
       .push();
 
+
   const message = {
 
-    senderId: currentUser.uid,
+    senderId:
+      currentUser.uid,
 
-    receiverId: selectedUser.uid,
+    receiverId:
+      selectedUser.uid,
 
-    name: myProfile.name || "User",
+    name:
+      myProfile.name || "User",
 
-    text: text,
+    text:
+      text,
 
-    createdAt: Date.now()
+    createdAt:
+      Date.now()
 
   };
 
-  messageRef.set(message)
+
+  messageRef
+    .set(message)
 
     .then(() => {
 
@@ -1603,7 +1658,9 @@ function sendMessage(){
 
       input.focus();
 
-      updateRecentChat(selectedUser);
+      updateRecentChat(
+        selectedUser
+      );
 
     })
 
@@ -1622,8 +1679,6 @@ function sendMessage(){
     });
 
 }
-      
-
 
 /* =========================
    ENTER TO SEND
